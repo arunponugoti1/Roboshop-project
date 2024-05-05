@@ -8,7 +8,7 @@ metadata:
     tier: middleware
     project: roboshop 
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: catalogue  #Deployment label
