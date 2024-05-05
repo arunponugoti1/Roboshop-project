@@ -23,3 +23,22 @@ spec:
       containers:
       - name: mongodb
         image: joindevops/mongodb:1.0.0
+
+---
+# Taking clusterIP because we won't expose db pod to the outside world
+apiVersion: v1 
+kind: Service 
+metadata:
+  labels:
+    servise.app: mongodb 
+spec:
+  selector:
+    app: mongodb  #Deployment label
+    tier: database
+    project: roboshop
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 3007
+  
+
