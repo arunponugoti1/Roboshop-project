@@ -24,9 +24,9 @@ spec:
       containers:
       - name: mongodb
         image: joindevops/catalogue:1.0.0
-        envFrom: 
+        envFrom:
         - configMapRef:
-          name: catalogue
+            name: catalogue
 
 ---
 apiVersion: v1
