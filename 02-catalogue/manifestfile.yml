@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    app: catalogue  #Deployment label
+    tier: middleware
+    project: roboshop 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalogue  #Deployment label
+      tier: middleware
+      project: roboshop
+  template:
+    metadata:
+      labels:
+        app: catalogue  #Deployment label
+        tier: middleware
+        project: roboshop
+    spec:
+      containers:
+      - name: mongodb
+        image: joindevops/catalogue:1.0.0
+        envFrom: 
+        - configMapRef:
+          name: catalogue
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue
+  namespace: roboshop
+spec:
+  selector:
+    app: catalogue  #Deployment label
+    tier: middleware
+    project: roboshop
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue
+data:
+  # property-like keys; each key maps to a simple value
+  MONGO: "true"
+  MONGO_URL:  "mongodb://my-service:27017/catalogue" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
