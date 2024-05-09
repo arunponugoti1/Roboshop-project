@@ -86,7 +86,7 @@ data:
         }    
 
         location /nginx_status {
-        
+
             stub_status on;
             access_log off;
         }
@@ -125,7 +125,7 @@ spec:
           - key: nginx.conf
             path: nginx.conf
       containers:
-      - name: catalogue
+      - name: web 
         image: joindevops/web:1.0.0
         resources:
           requests:
